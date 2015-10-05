@@ -10,7 +10,16 @@
 
 @interface VerticalViewController : UIViewController
 
-- (IBAction)actionPushButton:(id)sender;
+@property (unsafe_unretained, nonatomic) IBOutlet UILabel *mainScreen;
+@property (unsafe_unretained, nonatomic) IBOutlet UILabel *preScreen;
+
+
+#pragma mark - Action
+
+- (IBAction)actionPushNumberButton:(id)sender;
+- (IBAction)actionPushOperationsButton:(id)sender;
+- (IBAction)actionPushResultButton:(id)sender;
+
 
 @end
 
