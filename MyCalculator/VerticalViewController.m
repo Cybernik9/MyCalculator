@@ -36,6 +36,7 @@ static bool isPointNumberOne;
 static NSInteger beforePointNumber;
 static NSInteger afterPointNumber;
 
+static bool isMinus;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -46,6 +47,8 @@ static NSInteger afterPointNumber;
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+#pragma mark - My heper methods
 
 - (void) countTwoNumbers {
     
@@ -88,18 +91,35 @@ static NSInteger afterPointNumber;
     self.mainScreen.text = [NSString stringWithFormat:@"%g",number];
 }
 
+- (void) printNumberToPreScreen:(CGFloat) number {
+    self.preScreen.text = [NSString stringWithFormat:@"%g",number];
+}
+
+- (void) twoIntegerNumberToOneFloat {
+    NSString* strPointNumber;
+    strPointNumber = self.mainScreen.text;
+    isPointNumberOne ? (numberOne = strPointNumber.doubleValue) : (numberTwo = strPointNumber.doubleValue);
+    isPoint = isPointNumberOne = NO;
+    afterPointNumber = beforePointNumber = 0;
+}
+
 #pragma mark - Action
 
 - (IBAction)actionPushNumberButton:(id)sender {
     
+    if (isMinus) {
+        
+    }
     if (isPoint && operations) {
         beforePointNumber = numberTwo;
         afterPointNumber = afterPointNumber * leftShiftToOneNumber + [sender tag];
+        //[self twoIntegerNumberToOneFloat];
         self.mainScreen.text = [NSString stringWithFormat:@"%ld.%ld",(long)beforePointNumber,(long)afterPointNumber];
     } else if (isPoint) {
         beforePointNumber = numberOne;
         afterPointNumber = afterPointNumber * leftShiftToOneNumber + [sender tag];
-        isPointNumberOne = true;
+        isPointNumberOne = YES;
+        //[self twoIntegerNumberToOneFloat];
         self.mainScreen.text = [NSString stringWithFormat:@"%ld.%ld",(long)beforePointNumber,(long)afterPointNumber];
     } else if (operations) {
         numberTwo = numberTwo * leftShiftToOneNumber + [sender tag];
@@ -115,11 +135,7 @@ static NSInteger afterPointNumber;
     //push + - X / % +/-
     
     if (isPoint) {
-        NSString* strPointNumber;
-        strPointNumber = self.mainScreen.text;
-        isPointNumberOne ? (numberOne = strPointNumber.doubleValue) : (numberTwo = strPointNumber.doubleValue);
-        isPoint = isPointNumberOne = false;
-        afterPointNumber = beforePointNumber = 0;
+        [self twoIntegerNumberToOneFloat];
     }
     
     if (numberOne && numberTwo && operations) {
@@ -134,23 +150,24 @@ static NSInteger afterPointNumber;
 - (IBAction)actionPushResultButton:(id)sender {
     //push =
     
-    if (isPoint) {
-        NSString* strPointNumber;
-        strPointNumber = [NSString stringWithFormat:@"%ld.%ld",(long)beforePointNumber,(long)afterPointNumber];
-        isPointNumberOne ? (numberOne = strPointNumber.doubleValue) : (numberTwo = strPointNumber.doubleValue);
-        isPoint = isPointNumberOne = false;
-        afterPointNumber = beforePointNumber = 0;
+    if (numberOne && numberTwo && operations) {
+        if (isPoint) {
+            [self twoIntegerNumberToOneFloat];
+        }
+        [self countTwoNumbers];
     }
-    
-    [self countTwoNumbers];
 }
 
 - (IBAction)actionACButton:(id)sender {
+    //push AC
     
     numberOne = numberTwo = result = operations = 0;
     afterPointNumber = beforePointNumber = 0;
+    
     self.mainScreen.text = @"0";
     self.preScreen.text = @"";
+    
+    isPoint = isPointNumberOne = NO;
 }
 
 - (IBAction)actionPoint:(id)sender {
@@ -166,6 +183,7 @@ static NSInteger afterPointNumber;
         numberOne *= -1;
         [self printNumberToMainScreen:numberOne];
     }
+    isMinus?YES:NO;
 }
 
 - (IBAction)actionPercentage:(id)sender {
