@@ -14,12 +14,16 @@
 @property (unsafe_unretained, nonatomic) IBOutlet UILabel *preScreen;
 
 
+
 #pragma mark - Action
 
 - (IBAction)actionPushNumberButton:(id)sender;
 - (IBAction)actionPushOperationsButton:(id)sender;
 - (IBAction)actionPushResultButton:(id)sender;
-
+- (IBAction)actionACButton:(id)sender;
+- (IBAction)actionPoint:(id)sender;
+- (IBAction)actionPlusOrMinus:(id)sender;
+- (IBAction)actionPercentage:(id)sender;
 
 @end
 
