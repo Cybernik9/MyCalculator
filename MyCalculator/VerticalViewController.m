@@ -209,7 +209,9 @@ static bool isPushOperation;
 - (IBAction)actionPlusOrMinus:(id)sender {
     //push +/-
 
-    if (numberTwo) {
+    if (isPushOperation) {
+        [self printNumberToMainScreen:-0];
+    }else if (numberTwo) {
         numberTwo *= -1;
         [self printNumberToMainScreen:numberTwo];
         //self.preScreen.text = [NSString stringWithFormat:@"%@ %g",self.preScreen.text, numberTwo];
