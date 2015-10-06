@@ -37,6 +37,8 @@ static NSInteger beforePointNumber;
 static NSInteger afterPointNumber;
 
 static bool isMinus;
+static bool isPushResultButton;
+static bool isPushOperation;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -54,19 +56,15 @@ static bool isMinus;
     
     switch (operations) {
         case OperationTypePlus:
-            operationsSymbol = "+";
             result = [Calculator plusTwoNumbers:numberOne numberTwo:numberTwo];
             break;
         case OperationTypeMinus:
-            operationsSymbol = "-";
             result = [Calculator minusTwoNumbers:numberOne numberTwo:numberTwo];
             break;
         case OperationTypeMultiply:
-            operationsSymbol = "x";
             result = [Calculator multiplyTwoNumbers:numberOne numberTwo:numberTwo];
             break;
         case OperationTypeShare:
-            operationsSymbol = "/";
             result = [Calculator shareTwoNumbers:numberOne numberTwo:numberTwo];
             break;
     }
@@ -76,23 +74,21 @@ static bool isMinus;
     
     [self printNumberToMainScreen:result];
     
-    if ([self.preScreen.text isEqualToString:@""]) {
-        self.preScreen.text = [NSString stringWithFormat:@"%g %s %g",numberOne, operationsSymbol, numberTwo];
-    } else {
-        self.preScreen.text = [NSString stringWithFormat:@"%@ %s %g",self.preScreen.text, operationsSymbol, numberTwo];
+    if (isPushResultButton) {
+        self.preScreen.text = [NSString stringWithFormat:@"",self.preScreen.text, numberTwo];
     }
     
     numberOne = result;
     numberTwo = operations = 0;
-    
+    operationsSymbol = "";
 }
 
 - (void) printNumberToMainScreen:(CGFloat) number {
     self.mainScreen.text = [NSString stringWithFormat:@"%g",number];
 }
 
-- (void) printNumberToPreScreen:(CGFloat) number {
-    self.preScreen.text = [NSString stringWithFormat:@"%g",number];
+- (void) printNumberToPreScreen {
+    //self.preScreen.text = [NSString stringWithFormat:@"%g",number];
 }
 
 - (void) twoIntegerNumberToOneFloat {
@@ -107,10 +103,13 @@ static bool isMinus;
 
 - (IBAction)actionPushNumberButton:(id)sender {
     
-    if (isMinus) {
-        
-    }
-    if (isPoint && operations) {
+    if (isMinus && operations) {
+        numberTwo = numberTwo * leftShiftToOneNumber - [sender tag];
+        [self printNumberToMainScreen:numberTwo];
+    } else if (isMinus) {
+        numberOne = numberOne * leftShiftToOneNumber - [sender tag];
+        [self printNumberToMainScreen:numberOne];
+    }else if (isPoint && operations) {
         beforePointNumber = numberTwo;
         afterPointNumber = afterPointNumber * leftShiftToOneNumber + [sender tag];
         //[self twoIntegerNumberToOneFloat];
@@ -129,10 +128,37 @@ static bool isMinus;
         [self printNumberToMainScreen:numberOne];
     }
     
+    isPushOperation = NO;
 }
 
 - (IBAction)actionPushOperationsButton:(id)sender {
     //push + - X / % +/-
+    
+    switch ([sender tag]) {
+        case OperationTypePlus:
+            operationsSymbol = "+";
+            break;
+        case OperationTypeMinus:
+            operationsSymbol = "-";
+            break;
+        case OperationTypeMultiply:
+            operationsSymbol = "x";
+            break;
+        case OperationTypeShare:
+            operationsSymbol = "/";
+            break;
+    }
+    
+    if ([self.preScreen.text isEqualToString:@""]) {
+        self.preScreen.text = [NSString stringWithFormat:@"%g %s ",numberTwo?numberTwo:numberOne, operationsSymbol];
+    } else {
+        if (isPushOperation) {
+            self.preScreen.text = [self.preScreen.text substringToIndex:self.preScreen.text.length-3];
+            self.preScreen.text = [NSString stringWithFormat:@"%@ %s ",self.preScreen.text, operationsSymbol];
+        } else {
+            self.preScreen.text = [NSString stringWithFormat:@"%@ %g %s ",self.preScreen.text ,numberTwo?numberTwo:numberOne, operationsSymbol];
+        }
+    }
     
     if (isPoint) {
         [self twoIntegerNumberToOneFloat];
@@ -144,11 +170,15 @@ static bool isMinus;
     } else {
         operations = [sender tag];
     }
-   
+    
+    isMinus = NO;
+    isPushOperation = YES;
 }
 
 - (IBAction)actionPushResultButton:(id)sender {
     //push =
+    
+    isPushResultButton = YES;
     
     if (numberOne && numberTwo && operations) {
         if (isPoint) {
@@ -156,6 +186,8 @@ static bool isMinus;
         }
         [self countTwoNumbers];
     }
+    
+    isPushResultButton = NO;
 }
 
 - (IBAction)actionACButton:(id)sender {
@@ -167,7 +199,7 @@ static bool isMinus;
     self.mainScreen.text = @"0";
     self.preScreen.text = @"";
     
-    isPoint = isPointNumberOne = NO;
+    isPoint = isPointNumberOne = isMinus = NO;
 }
 
 - (IBAction)actionPoint:(id)sender {
@@ -175,18 +207,28 @@ static bool isMinus;
 }
 
 - (IBAction)actionPlusOrMinus:(id)sender {
-    
+    //push +/-
+
     if (numberTwo) {
         numberTwo *= -1;
         [self printNumberToMainScreen:numberTwo];
+        //self.preScreen.text = [NSString stringWithFormat:@"%@ %g",self.preScreen.text, numberTwo];
     } else {
         numberOne *= -1;
         [self printNumberToMainScreen:numberOne];
+        //if ([self.preScreen.text isEqualToString:@""]) {
+        //    self.preScreen.text = [NSString stringWithFormat:@"%g",numberOne];
+       // } else {
+        //    self.preScreen.text = [NSString stringWithFormat:@"%@ %g",self.preScreen.text, numberOne];
+       // }
     }
-    isMinus?YES:NO;
+    
+    isMinus? (isMinus = NO) : (isMinus = YES);
+    
 }
 
 - (IBAction)actionPercentage:(id)sender {
+    //push %
     
     if (numberTwo) {
         numberTwo /= 100;
