@@ -8,11 +8,23 @@
 
 #import <Foundation/Foundation.h>
 
+@protocol LogicCalculatorProtocol <NSObject>
+
+- (void)calculatorLogicDidChangeValue:(NSString *)value;
+- (void) clearButtonDidChange:(NSString*) value;
+
+@end
+
 @interface LogicCalculator : NSObject
 
-- (NSString*) inputDigit:(NSString*) number;
+- (void) inputDigit:(NSString*) number;
+- (void) simpleOperation:(NSInteger) operation;
+- (void) countTwoNumbers;
+- (void) plusMinusNumber;
+- (void) makePoint;
+- (void) percentageNumber;
+- (void) clearAll;
 
-
-@property (nonatomic, weak) NSObject <LogicCalculator> *logicDelegate;
+@property (nonatomic, weak) NSObject <LogicCalculatorProtocol> *logicDelegate;
 
 @end

@@ -11,7 +11,7 @@
 @interface HorizontalViewController : UIViewController
 
 @property (weak, nonatomic) IBOutlet UILabel *mainScreenLable;
-
+@property (weak, nonatomic) IBOutlet UIButton *clearButton;
 
 
 - (IBAction)actionPushNumber:(id)sender;

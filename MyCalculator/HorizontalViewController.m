@@ -9,9 +9,9 @@
 #import "HorizontalViewController.h"
 #import "LogicCalculator.h"
 
-@interface HorizontalViewController ()
+@interface HorizontalViewController () <LogicCalculatorProtocol>
 
-@property LogicCalculator* calc;
+@property LogicCalculator* logicCalculator;
 
 @end
 
@@ -21,8 +21,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 
-    self.calc = [[LogicCalculator alloc] init];
-    self.calc.logicDelegate = self;
+    self.logicCalculator = [[LogicCalculator alloc] init];
+    self.logicCalculator.logicDelegate = self;
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -42,27 +43,47 @@
 
 
 
-
+#pragma mark - Action
 
 - (IBAction)actionPushNumber:(id)sender {
-    
+    [self.logicCalculator inputDigit:[NSString stringWithFormat:@"%ld", (long)[sender tag]]];
 }
 
 - (IBAction)actionPushSimpleOperation:(id)sender {
+    [self.logicCalculator simpleOperation:[sender tag]];
 }
 
 - (IBAction)actionPushEqual:(id)sender {
+    [self.logicCalculator countTwoNumbers];
 }
 
 - (IBAction)actionPushPercentage:(id)sender {
+    [self.logicCalculator percentageNumber];
 }
 
 - (IBAction)actionPushPlusMinus:(id)sender {
+    [self.logicCalculator plusMinusNumber];
 }
 
 - (IBAction)actionPushPoint:(id)sender {
+    [self.logicCalculator makePoint];
 }
 
 - (IBAction)actionPushAC:(id)sender {
+    [self.logicCalculator clearAll];
 }
+
+
+
+
+#pragma mark - LogicCalculatorProtocol
+
+- (void) calculatorLogicDidChangeValue:(NSString*) value {
+    self.mainScreenLable.text = value;
+}
+
+- (void) clearButtonDidChange:(NSString*) value {
+    [self.clearButton setTitle:value forState:UIControlStateNormal];
+}
+
 @end

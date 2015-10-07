@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MyCalculator/VerticalViewController.m"
-            timestampString = "465835253.592087"
+            timestampString = "465842308.236275"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "106"
-            endingLineNumber = "106"
+            startingLineNumber = "117"
+            endingLineNumber = "117"
             landmarkName = "-actionPushNumberButton:"
             landmarkType = "5">
          </BreakpointContent>
@@ -25,13 +25,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "MyCalculator/VerticalViewController.m"
-            timestampString = "465835253.592087"
+            filePath = "MyCalculator/LogicCalculator.m"
+            timestampString = "465917980.590188"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "152"
-            endingLineNumber = "152"
-            landmarkName = "-actionPushOperationsButton:"
+            startingLineNumber = "77"
+            endingLineNumber = "77"
+            landmarkName = "-countTwoNumbers"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
