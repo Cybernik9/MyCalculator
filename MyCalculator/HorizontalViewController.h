@@ -10,4 +10,20 @@
 
 @interface HorizontalViewController : UIViewController
 
+@property (weak, nonatomic) IBOutlet UILabel *mainScreenLable;
+
+
+
+- (IBAction)actionPushNumber:(id)sender;
+- (IBAction)actionPushSimpleOperation:(id)sender;
+- (IBAction)actionPushEqual:(id)sender;
+- (IBAction)actionPushPercentage:(id)sender;
+- (IBAction)actionPushPlusMinus:(id)sender;
+- (IBAction)actionPushPoint:(id)sender;
+- (IBAction)actionPushAC:(id)sender;
+
+
+
+
+
 @end

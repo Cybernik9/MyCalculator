@@ -7,8 +7,11 @@
 //
 
 #import "HorizontalViewController.h"
+#import "LogicCalculator.h"
 
 @interface HorizontalViewController ()
+
+@property LogicCalculator* calc;
 
 @end
 
@@ -17,6 +20,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+
+    self.calc = [[LogicCalculator alloc] init];
+    self.calc.logicDelegate = self;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -34,4 +40,29 @@
 }
 */
 
+
+
+
+
+- (IBAction)actionPushNumber:(id)sender {
+    
+}
+
+- (IBAction)actionPushSimpleOperation:(id)sender {
+}
+
+- (IBAction)actionPushEqual:(id)sender {
+}
+
+- (IBAction)actionPushPercentage:(id)sender {
+}
+
+- (IBAction)actionPushPlusMinus:(id)sender {
+}
+
+- (IBAction)actionPushPoint:(id)sender {
+}
+
+- (IBAction)actionPushAC:(id)sender {
+}
 @end

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		841AD64E1BC503020068873B /* LogicCalculator.m in Sources */ = {isa = PBXBuildFile; fileRef = 841AD64D1BC503020068873B /* LogicCalculator.m */; };
 		8452A00E1BBFB8D5000CCF39 /* HorizontalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8452A00D1BBFB8D5000CCF39 /* HorizontalViewController.m */; };
 		8452A0111BBFC3B7000CCF39 /* Calculator.m in Sources */ = {isa = PBXBuildFile; fileRef = 8452A0101BBFC3B7000CCF39 /* Calculator.m */; };
 		846490351BBD3E6E00332093 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 846490341BBD3E6E00332093 /* main.m */; };
@@ -29,6 +30,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		841AD64C1BC503020068873B /* LogicCalculator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogicCalculator.h; sourceTree = "<group>"; };
+		841AD64D1BC503020068873B /* LogicCalculator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogicCalculator.m; sourceTree = "<group>"; };
 		8452A00C1BBFB8D5000CCF39 /* HorizontalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HorizontalViewController.h; sourceTree = "<group>"; };
 		8452A00D1BBFB8D5000CCF39 /* HorizontalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HorizontalViewController.m; sourceTree = "<group>"; };
 		8452A00F1BBFC3B7000CCF39 /* Calculator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Calculator.h; sourceTree = "<group>"; };
@@ -95,6 +98,8 @@
 				8464903A1BBD3E6E00332093 /* VerticalViewController.m */,
 				8452A00C1BBFB8D5000CCF39 /* HorizontalViewController.h */,
 				8452A00D1BBFB8D5000CCF39 /* HorizontalViewController.m */,
+				841AD64C1BC503020068873B /* LogicCalculator.h */,
+				841AD64D1BC503020068873B /* LogicCalculator.m */,
 				8464903C1BBD3E6E00332093 /* Main.storyboard */,
 				8464903F1BBD3E6E00332093 /* Images.xcassets */,
 				846490411BBD3E6E00332093 /* LaunchScreen.xib */,
@@ -229,6 +234,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				841AD64E1BC503020068873B /* LogicCalculator.m in Sources */,
 				8464903B1BBD3E6E00332093 /* VerticalViewController.m in Sources */,
 				846490381BBD3E6E00332093 /* AppDelegate.m in Sources */,
 				8452A00E1BBFB8D5000CCF39 /* HorizontalViewController.m in Sources */,
